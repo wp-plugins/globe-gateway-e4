@@ -11,7 +11,9 @@ Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-== This is for Globe Gateway e4 Hosted Payment Page. This is something I created to make it easier for word press users to set-up a pay button on their website. ==
+
+== Description ==
+This is for Globe Gateway e4 Hosted Payment Page. This is something I created to make it easier for word press users to set-up a pay button on their website.
 
 
 == Installation ==
