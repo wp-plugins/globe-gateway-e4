@@ -1,29 +1,30 @@
 <?php
 /*
-Plugin Name: Globe Gateway e4 | Hosted Payment Page |
+Plugin Name: Global Gateway e4 | Hosted Payment Page |
 Plugin URI: http://www.djkidnyce.com/plug-ins/
-Description: This is for Globe Gateway e4 Hosted Payment Page. This is something I created to make it easier for word press users to set-up a pay button on their website.
+Description: This is for Global Gateway e4 Hosted Payment Page. Global Gateway Made easier for WordPress users to set-up a pay button on their website.
 Author: Donnell Council
-Version: 0.0.2
+Version: 0.0.3
 Author URI: http://www.djkidnyce.com
 */
 add_action('admin_menu', 'e4hpp_admin_actions');
 function e4hpp_admin_actions() 
 {
-add_options_page('Globe Gateway e4 Hosted Payment Page', 'Globe Gateway e4 Hosted Payment Page', 'manage_options', _FILE_, 'e4hpp_admin');
+add_options_page('Global Gateway e4 Hosted Payment Page', 'Global Gateway e4 Hosted Payment Page', 'manage_options', _FILE_, 'e4hpp_admin');
 }
 function e4hpp_admin()
 {
 
 ?>
+
 	<div class="wrap">
-	<h3>Globe Gateway e4 Hosted Payment Page</h3>
+	<h3>Global Gateway e4 Hosted Payment Page</h3>
 	<table class="widefat">
 	<thead>
 	<tr>
 <form name='verify_login_transkey' method='POST' action='<?php echo $_SERVER['REQUEST_URI']; ?>' onsubmit='return validateForm()'>
-<br>X Login:<input name="x_login" value="" size="25" autocomplete="off"/><br/><div id='verify_login'></div>
-<br>Transaction Key:<input name="transaction_key" value="" size="22" autocomplete="off"/><br/><div id='verify_transkey'></div>
+<br>X Login:<input name="x_login" value="" size="25" autocomplete="off"/><br/>
+<br>Transaction Key:<input name="transaction_key" value="" size="22" autocomplete="off"/><br/>
 <input type='checkbox' name='attributes[]' value='2'>Company</input><br/>
 <input type='checkbox' name='attributes[]' value='1'>First Name and Last Name</input><br/>
 <input type='checkbox' name='attributes[]' value='3'>Billing Address Fields</input><br/>
@@ -38,11 +39,6 @@ function e4hpp_admin()
 <input type='checkbox' name='attributes[]' value='10'>PO Number</input><br/>
 <input type='checkbox' name='attributes[]' value='11'>Reference 3</input><br/>
 <input type='checkbox' name='attributes[]' value='15'>Recurring Billing Fields</input><br/>
-
-
-<!--<br>Would You Like Us To Host The Confirm File<br />
-Name Of Your Business:
-<input name="we_host" value=""  autocomplete="off"/><br/> -->
 Live or Demo
 <select name="live_demo" id="live_demo">
 <option value="https://globalgatewaye4.firstdata.com/payment" selected>Live</option>
@@ -221,9 +217,10 @@ HMAC Calculation
 </select>
 <input type='submit' value='Generate Code' />
 </form>
-	</div>
+</div>
 <?php
-	function get_code(){
+// Updated HTML formating
+function get_code(){
 		//get there selected checkboxes
 		$code_wanted = $_POST['attributes'];
 		$arrylen = count($code_wanted);
@@ -233,10 +230,10 @@ HMAC Calculation
 		}else{
 		
 			//set strings that will be used after the user checks the boxes
-			$first_last = htmlspecialchars("<br>First Name:<input type='text'name='x_first_name'>")."<br/>"."\n".htmlspecialchars("<br>Last Name<input type='text'name='x_last_name'>")."<br/>"."\n";
-			$x_company = htmlspecialchars("<br>Company:<input type='text'name='x_company'>")."<br/>"."\n";
-			$x_address = htmlspecialchars("<br>Address:<input type='text'name='x_address'>")."<br/>". htmlspecialchars("<br>City:<input type='text'name='x_city'/>")."<br/>"."\n". 
-																htmlspecialchars("<br>State<select name='x_state' id='x_state'>
+			$first_last = htmlspecialchars("<tr><td>First Name:</td><td><input type='text'name='x_first_name'></td></tr>")."\n".htmlspecialchars("<tr><td>Last Name:</td><td><input type='text'name='x_last_name'></td></tr>")."\n";
+			$x_company = htmlspecialchars("<tr><td>Company:</td><td><input type='text'name='x_company'></td></tr>")."\n";
+			$x_address = htmlspecialchars("<tr><td>Bill To Address:</td><td><input type='text'name='x_address'></td></tr>").htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_city'/></td></tr>")."\n". 
+																htmlspecialchars("<tr><td>State</td><td><select name='x_state' id='x_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
 																<option value='AL'> AL </option>
@@ -291,10 +288,10 @@ HMAC Calculation
 																<option value='WI'> WI </option>
 																<option value='WV'> WV </option>
 																<option value='WY'> WY </option>
-																</select>")."<br/>"."\n". 
-																htmlspecialchars("<br>Zip Code:<input type='text'name='x_zip'>")."<br/>"."\n";
-			$x_ship_address =  htmlspecialchars("<br>Ship To Address:<input type='text'name='x_ship_to_address'>")."<br/>"."\n". htmlspecialchars("<br>Ship To City:<input type='text'name='x_ship_to_city'/>")."<br/>"."\n". 
-																htmlspecialchars("<br>Ship To State<select name='x_ship_to_state' id='x_ship_to_state'>
+																</select></tr></td>")."\n". 
+																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_zip'></td></tr>")."\n";
+			$x_ship_address =  htmlspecialchars("<tr><td>Ship To Address:</td><td><input type='text'name='x_ship_to_address'></td></tr>")."\n". htmlspecialchars("<tr><td>Ship To City:</td><td><input type='text'name='x_ship_to_city'/></td></tr>")."\n". 
+																htmlspecialchars("<tr><td>Ship To State</td><td><select name='x_ship_to_state' id='x_ship_to_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
 																<option value='AL'> AL </option>
@@ -349,30 +346,30 @@ HMAC Calculation
 																<option value='WI'> WI </option>
 																<option value='WV'> WV </option>
 																<option value='WY'> WY </option>
-																</select>")."<br/>"."\n". 
-																htmlspecialchars("<br>Ship To Zip Code:<input type='text'name='x_ship_to_zip'>")."<br/>"."\n";
+																</select></td></tr>")."\n". 
+																htmlspecialchars("<tr><td>Ship To Zip Code:</td><td><input type='text'name='x_ship_to_zip'></td></tr>")."\n";
 			$level_3_Fields = htmlspecialchars("<br>Tax Exempt<select name='x_tax_exempt' id='x_tax_exempt'>
 																<option value='..' selected='1'>
 																<option value='TRUE '> Yes </option>
 																<option value='FALSE'> No </option>
-																</select>")."<br/>"."\n".
-																htmlspecialchars("<br>Tax  Amount:<input type='text'name='x_tax'>")."<br/>"."\n".
-																htmlspecialchars("<br>Freight:<input type='text'name='x_freight'>")."<br/>"."\n".
-																htmlspecialchars("<br>Duty:<input type='text'name='x_duty'>")."<br/>"."\n".
-																htmlspecialchars("<br>Discount amount:<input type='text'name='discount_amount'>")."<br/>"."\n";
-			$x_zip = htmlspecialchars("<br>Zip Code:<input type='text'name='x_zip'>")."<br/>"."\n";
-			$x_country = htmlspecialchars("<br>Country:<input type='text'name='x_country'>")."<br/>"."\n";
-			$x_email = htmlspecialchars("<br>E-Mail:<input type='text'name='x_email'>")."<br/>"."\n";
-			$x_invoice_num = htmlspecialchars("<br>Invoice Number:<input type='text'name='x_invoice_num'>")."<br/>"."\n";
-			$x_po_num = htmlspecialchars("<br>Po Number:<input type='text'name='x_po_num'>")."<br/>"."\n";
-			$x_reference_3 = htmlspecialchars("<br>Reference 3:<input type='text'name='x_reference_3'>")."<br/>"."\n";
-			$x_amount = htmlspecialchars("<br>Amount:<input type='text'name='x_amount'>")."<br/>"."\n";
+																</select>")."\n".
+																htmlspecialchars("<br>Tax  Amount:<input type='text'name='x_tax'>")."\n".
+																htmlspecialchars("<br>Freight:<input type='text'name='x_freight'>")."\n".
+																htmlspecialchars("<br>Duty:<input type='text'name='x_duty'>")."\n".
+																htmlspecialchars("<br>Discount amount:<input type='text'name='discount_amount'>")."\n";
+			$x_zip = htmlspecialchars("<br>Zip Code:<input type='text'name='x_zip'>")."\n";
+			$x_country = htmlspecialchars("<tr><td>Country:</td><td><input type='text'name='x_country'></td></tr>")."\n";
+			$x_email = htmlspecialchars("<tr><td>E-Mail:</td><td><input type='text'name='x_email'></td></tr>")."\n";
+			$x_invoice_num = htmlspecialchars("<tr><td>Invoice Number:</td><td><input type='text'name='x_invoice_num'></td></tr>")."\n";
+			$x_po_num = htmlspecialchars("<tr><td>Po Number:</td><td><input type='text'name='x_po_num'></td></tr>")."\n";
+			$x_reference_3 = htmlspecialchars("<tr><td>Reference 3:</td><td><input type='text'name='x_reference_3'></td></tr>")."\n";
+			$x_amount = htmlspecialchars("<tr><td>Amount:</td><td><input type='text'name='x_amount'></td></tr></table>")."\n";
 			$x_recurring_billing_fields = 
-			htmlspecialchars("<br>Recurring Billing Fields<br/><br><input type='checkbox'name='x_recurring_billing' value='TRUE'> />")."<br/>"."\n".
-			htmlspecialchars("<br>Recurring Billing ID<input type='text'name='x_recurring_billing_id'>")."<br/>"."\n".
-			htmlspecialchars("<br>Start Date Format: YYYYMMDD<input type='text'name='x_recurring_billing_start_date'>")."<br />"."\n".
-			htmlspecialchars("<br>End Date Format: YYYYMMDD<input type='text'name='x_recurring_billing_end_date'>")."<br/>"."\n".
-			htmlspecialchars("<br>Recurring Amount<input type='text'name='x_recurring_billing_amount'>")."<br/>"."\n";
+			htmlspecialchars("<th>Recurring Billing Fields</th><tr><td>Recurring ?</td><td><input type='checkbox'name='x_recurring_billing' value='TRUE'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Recurring Billing ID</td><td><input type='text'name='x_recurring_billing_id'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Start Date Format: YYYYMMDD</td><td><input type='text'name='x_recurring_billing_start_date'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>End Date Format: YYYYMMDD</td><td><input type='text'name='x_recurring_billing_end_date'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Recurring Amount</td><td><input type='text'name='x_recurring_billing_amount'></td></tr>")."\n";
 			
 			//strings for php codes
 			$x_login = $_POST['x_login']; 
@@ -425,7 +422,7 @@ HMAC Calculation
 			$php_x_fp_hash = "\$x_fp_hash = hash_hmac('$hmac_calculation', \$hmac_data, \$transaction_key);\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_fp_hash\" value=\"' . \$x_fp_hash . '\" size=\"50\">' );")."\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_login\" value=\"' . \$x_login . '\">' );")."\n";
 			
 			//set a code separate from what the php will be so it can be added together later
-			$form_code = htmlspecialchars("<form method='POST' action='$my_file'>")."<br/>"."\n";
+			$form_code = htmlspecialchars("<table align='center' border='1'>")."\n" .htmlspecialchars("<form method='POST' action='$my_file'>")."\n";
 			
 			//the php code that will go along with the form they created
 			//will allow for you to easily add the form validation code for each one
@@ -593,7 +590,7 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_currency_code\" value=\
 					}
 				}
 			}
-			$form_code .= htmlspecialchars("<input type='submit' value='Submit'>")."<br/>"."\n".htmlspecialchars("</form>");
+			$form_code .= htmlspecialchars("<div align='center'><input align='center' type='submit' value='Submit'></div></tr></td>")."\n".htmlspecialchars("</form>");
 $php_code .= $php_x_fp_timestamp.htmlspecialchars("?>"." <input type='hidden' name='x_show_form' value='PAYMENT_FORM'/>"."\n"."</form>"."Processing your \$ <?php echo \$x_amount ?> payment <?php echo \$x_first_name ?>, please wait..."."</div>
 </body>
 </html>");
