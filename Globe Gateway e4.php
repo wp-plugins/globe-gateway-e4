@@ -4,7 +4,7 @@ Plugin Name: Global Gateway e4 | Hosted Payment Page |
 Plugin URI: http://www.djkidnyce.com/plug-ins/
 Description: This is for Global Gateway e4 Hosted Payment Page. Global Gateway Made easier for WordPress users to set-up a pay button on their website.
 Author: Donnell Council
-Version: 0.0.4
+Version: 0.0.5
 Author URI: http://www.djkidnyce.com
 */
 add_action('admin_menu', 'e4hpp_admin_actions');
