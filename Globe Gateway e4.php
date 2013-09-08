@@ -385,9 +385,9 @@ function get_code(){
 			$live_demo =$_POST['live_demo'];
 			$time_stamp = time();
 			$confirm_file = 'confirm'.'.php';
-			$my_file = plugins_url('global-gateway-e4/') . $confirm_file;
+			$my_file = plugins_url('globe-gateway-e4/') . $confirm_file;
 			$xlogin_transkey = 'xlogin_transkey'.'.php';
-			$xlogin_transkey_location = plugins_url('global-gateway-e4/') . $xlogin_transkey;
+			$xlogin_transkey_location = plugins_url('globe-gateway-e4/') . $xlogin_transkey;
 
 			
 			//$filename = uniqid('confirm', true) . '.php';

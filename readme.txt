@@ -59,3 +59,5 @@ This section describes how to install the plugin and get it working.
 * You are now able to view the X Login and Transaction Key from the file.
 * Fixed uninstall. When you remove the plug-in, all the file that came with the plug-in will be deleted.
 * Made the Amount field  required in the HTML code.
+= 0.0.5 =
+* Fixed miskeyed code. 
