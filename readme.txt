@@ -1,13 +1,13 @@
 === Global Gateway e4 | Hosted Payment Page | ===
 
 Author: Donnell Council
-Version: 0.0.3
+Version: 0.0.4
 Author URI: http://www.djkidnyce.com
-Contributors: Donnell Council
-Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4
+Contributors: DonnellC
+Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4, First Data
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 0.0.3
+Stable tag: 0.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,15 +17,15 @@ This is for Globe Gateway e4 Hosted Payment Page. This is something I created to
 
 == Screenshots ==
 
-1. screenshots/screenshot1.png
-2. screenshots/screenshot2.png
+1. screenshot1.png
+2. screenshot2.png
 Once the plug-in is installed and activated. 
-3. screenshots/screenshot3.png
+3. screenshot3.png
 Under the setting tab they will need to click on Global Gateway e4 Hosted Payment Page.
-4. screenshots/screenshot4.png
+4. screenshot4.png
 Next, it will ask for the X Login and Transaction Key which can be found on the hosted payment page.  Next, pick the fields you want displayed. 
 Once you select the fields you want displayed, you will need to copy the HTML code.
-5. screenshots/screenshot5.png
+5. screenshot5.png
 
 == Installation ==
 
@@ -34,7 +34,7 @@ This section describes how to install the plugin and get it working.
 
 1. Upload `Global Gateway e4.zip` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3.You will need to creat a hosted payment page in your Globe Gateway e4 account. 
+3.You will need to create a hosted payment page in your Globe Gateway e4 account. 
 4.Once created you want to click on your payment page id.
 5.Next click on tap number 8 Hash Calculator. 
 6.From there you want to copy the X Login and Transaction Key.
@@ -51,3 +51,11 @@ This section describes how to install the plugin and get it working.
 * Updated plug-in name from Globe Gateway e4 to Global Gateway e4.
 * Updated HTML code for better formatting.
 * Added screen shots.
+
+= 0.0.4 =
+* The Plugin now creates 2 files in the plug-in directory. 
+	One holding the xlogin and transaction key, the 2nd one only submitting the transaction.
+	This is for added for security
+* You are now able to view the X Login and Transaction Key from the file.
+* Fixed uninstall. When you remove the plug-in, all the file that came with the plug-in will be deleted.
+* Made the Amount field  required in the HTML code.
