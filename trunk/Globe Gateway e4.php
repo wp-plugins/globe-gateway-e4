@@ -4,27 +4,33 @@ Plugin Name: Global Gateway e4 | Hosted Payment Page |
 Plugin URI: http://www.djkidnyce.com/plug-ins/
 Description: This is for Global Gateway e4 Hosted Payment Page. Global Gateway Made easier for WordPress users to set-up a pay button on their website.
 Author: Donnell Council
-Version: 0.0.3
+Version: 0.0.4
 Author URI: http://www.djkidnyce.com
 */
 add_action('admin_menu', 'e4hpp_admin_actions');
 function e4hpp_admin_actions() 
 {
-add_options_page('Global Gateway e4 Hosted Payment Page', 'Global Gateway e4 Hosted Payment Page', 'manage_options', _FILE_, 'e4hpp_admin');
+add_options_page('Global Gateway e4 Hosted Payment Page', 'Global Gateway e4 Hosted Payment Page', 'manage_options', 'global-gateway-e4', 'e4hpp_admin');
 }
 function e4hpp_admin()
 {
+$dir = plugin_dir_path( __FILE__ );
+$the_file = 'xlogin_transkey.php';
+$filename = $dir. $the_file;
 
+if (file_exists($filename)) 
+{
+include($dir. $the_file);
+}
 ?>
-
 	<div class="wrap">
 	<h3>Global Gateway e4 Hosted Payment Page</h3>
 	<table class="widefat">
 	<thead>
 	<tr>
 <form name='verify_login_transkey' method='POST' action='<?php echo $_SERVER['REQUEST_URI']; ?>' onsubmit='return validateForm()'>
-<br>X Login:<input name="x_login" value="" size="25" autocomplete="off"/><br/>
-<br>Transaction Key:<input name="transaction_key" value="" size="22" autocomplete="off"/><br/>
+<br>X Login: <input name="x_login" value="<?php echo $x_login; ?>" size="30" autocomplete="off" required/><br/>
+<br>Transaction Key: <input name="transaction_key" value="<?php echo $transaction_key; ?>" size="25" autocomplete="off" required/><br/>
 <input type='checkbox' name='attributes[]' value='2'>Company</input><br/>
 <input type='checkbox' name='attributes[]' value='1'>First Name and Last Name</input><br/>
 <input type='checkbox' name='attributes[]' value='3'>Billing Address Fields</input><br/>
@@ -50,6 +56,7 @@ Live or Demo
 <input type='checkbox' name='attributes[]' value='17' checked onclick='return false'>Timestamp</input><br/>
 <input type='checkbox' name='attributes[]' value='18' checked onclick='return false'>HMAC Data</input><br/>
 <input type='checkbox' name='attributes[]' value='19' checked onclick='return false'>Hash</input><br/>
+
 Currency
 <select name="currency_code" id="currency_code">
 				<option value="ADF">	Andorran Franc    (ADF)</option>
@@ -219,7 +226,6 @@ HMAC Calculation
 </form>
 </div>
 <?php
-// Updated HTML formating
 function get_code(){
 		//get there selected checkboxes
 		$code_wanted = $_POST['attributes'];
@@ -230,9 +236,9 @@ function get_code(){
 		}else{
 		
 			//set strings that will be used after the user checks the boxes
-			$first_last = htmlspecialchars("<tr><td>First Name:</td><td><input type='text'name='x_first_name'></td></tr>")."\n".htmlspecialchars("<tr><td>Last Name:</td><td><input type='text'name='x_last_name'></td></tr>")."\n";
+			$first_last = htmlspecialchars("<tr><td>First Name:</td><td><input type='text'name='x_first_name' required></td></tr>")."\n".htmlspecialchars("<tr><td>Last Name:</td><td><input type='text'name='x_last_name' required></td></tr>")."\n";
 			$x_company = htmlspecialchars("<tr><td>Company:</td><td><input type='text'name='x_company'></td></tr>")."\n";
-			$x_address = htmlspecialchars("<tr><td>Bill To Address:</td><td><input type='text'name='x_address'></td></tr>").htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_city'/></td></tr>")."\n". 
+			$x_address = htmlspecialchars("<th>Billing Address Fields</th><tr><td>Address:</td><td><input type='text'name='x_address'></td></tr>").htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_city'/></td></tr>")."\n". 
 																htmlspecialchars("<tr><td>State</td><td><select name='x_state' id='x_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
@@ -290,8 +296,8 @@ function get_code(){
 																<option value='WY'> WY </option>
 																</select></tr></td>")."\n". 
 																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_zip'></td></tr>")."\n";
-			$x_ship_address =  htmlspecialchars("<tr><td>Ship To Address:</td><td><input type='text'name='x_ship_to_address'></td></tr>")."\n". htmlspecialchars("<tr><td>Ship To City:</td><td><input type='text'name='x_ship_to_city'/></td></tr>")."\n". 
-																htmlspecialchars("<tr><td>Ship To State</td><td><select name='x_ship_to_state' id='x_ship_to_state'>
+			$x_ship_address =  htmlspecialchars("<th>Shipping Address Fields</th><tr><td>Address:</td><td><input type='text'name='x_ship_to_address'></td></tr>")."\n". htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_ship_to_city'/></td></tr>")."\n". 
+																htmlspecialchars("<tr><td>State</td><td><select name='x_ship_to_state' id='x_ship_to_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
 																<option value='AL'> AL </option>
@@ -347,7 +353,7 @@ function get_code(){
 																<option value='WV'> WV </option>
 																<option value='WY'> WY </option>
 																</select></td></tr>")."\n". 
-																htmlspecialchars("<tr><td>Ship To Zip Code:</td><td><input type='text'name='x_ship_to_zip'></td></tr>")."\n";
+																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_ship_to_zip'></td></tr>")."\n";
 			$level_3_Fields = htmlspecialchars("<br>Tax Exempt<select name='x_tax_exempt' id='x_tax_exempt'>
 																<option value='..' selected='1'>
 																<option value='TRUE '> Yes </option>
@@ -358,12 +364,12 @@ function get_code(){
 																htmlspecialchars("<br>Duty:<input type='text'name='x_duty'>")."\n".
 																htmlspecialchars("<br>Discount amount:<input type='text'name='discount_amount'>")."\n";
 			$x_zip = htmlspecialchars("<br>Zip Code:<input type='text'name='x_zip'>")."\n";
-			$x_country = htmlspecialchars("<tr><td>Country:</td><td><input type='text'name='x_country'></td></tr>")."\n";
+			$x_country = htmlspecialchars("<tr><td>Country:</td><td><input type='text'name=''></td></tr>")."\n";
 			$x_email = htmlspecialchars("<tr><td>E-Mail:</td><td><input type='text'name='x_email'></td></tr>")."\n";
 			$x_invoice_num = htmlspecialchars("<tr><td>Invoice Number:</td><td><input type='text'name='x_invoice_num'></td></tr>")."\n";
 			$x_po_num = htmlspecialchars("<tr><td>Po Number:</td><td><input type='text'name='x_po_num'></td></tr>")."\n";
 			$x_reference_3 = htmlspecialchars("<tr><td>Reference 3:</td><td><input type='text'name='x_reference_3'></td></tr>")."\n";
-			$x_amount = htmlspecialchars("<tr><td>Amount:</td><td><input type='text'name='x_amount'></td></tr></table>")."\n";
+			$x_amount = htmlspecialchars("<tr><td>Amount:</td><td><input type='text'name='x_amount' required></td></tr></table>")."\n";
 			$x_recurring_billing_fields = 
 			htmlspecialchars("<th>Recurring Billing Fields</th><tr><td>Recurring ?</td><td><input type='checkbox'name='x_recurring_billing' value='TRUE'></td></tr>")."\n".
 			htmlspecialchars("<tr><td>Recurring Billing ID</td><td><input type='text'name='x_recurring_billing_id'></td></tr>")."\n".
@@ -379,7 +385,10 @@ function get_code(){
 			$live_demo =$_POST['live_demo'];
 			$time_stamp = time();
 			$confirm_file = 'confirm'.'.php';
-			$my_file = admin_url() . $confirm_file;
+			$my_file = plugins_url('global-gateway-e4/') . $confirm_file;
+			$xlogin_transkey = 'xlogin_transkey'.'.php';
+			$xlogin_transkey_location = plugins_url('global-gateway-e4/') . $xlogin_transkey;
+
 			
 			//$filename = uniqid('confirm', true) . '.php';
 			
@@ -435,12 +444,12 @@ function get_code(){
 </SCRIPT> </head> <body> <div id=\"document\"> 
 <form name=\"confirm\" id=\"confirm\" action=\"$live_demo\">".
 "\n<?php
-//By using this code, you are agreeing, to use this code at YOUR OWN RISK and can NOT hold the creators of this code liable in anyway or form.//
+//Created By: Donnell Council | | If you are looking at this. You seem to know what you are doing. Need help setting up the recurring correctly. Contact me.//
 srand(time());			
-\$x_login = \"$x_login\"; 
-\$transaction_key = \"$transaction_key\"; 
+require('./xlogin_transkey.php'); 
 \$x_currency_code = \"$x_currency_code\";").
 htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_currency_code\" value=\"' . \$x_currency_code . '\">' );")."\n";
+			$store_xlogin_trans_key = htmlspecialchars("<?php")."\n" .htmlspecialchars("\$x_login = \"$x_login\"; \$transaction_key = \"$transaction_key\"; ");
 			
 			
 			if ($arrylen == 1){	//check if they only selected one
@@ -590,23 +599,31 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_currency_code\" value=\
 					}
 				}
 			}
-			$form_code .= htmlspecialchars("<div align='center'><input align='center' type='submit' value='Submit'></div></tr></td>")."\n".htmlspecialchars("</form>");
+			$form_code .= htmlspecialchars("<table align='center' border='1'><tr><td><input type='submit' value='Submit'></tr></td></table>")."\n".htmlspecialchars("</form>");
 $php_code .= $php_x_fp_timestamp.htmlspecialchars("?>"." <input type='hidden' name='x_show_form' value='PAYMENT_FORM'/>"."\n"."</form>"."Processing your \$ <?php echo \$x_amount ?> payment <?php echo \$x_first_name ?>, please wait..."."</div>
 </body>
 </html>");
-
-			$uniqe_file = file_put_contents( "$confirm_file", htmlspecialchars_decode( $php_code) );
+			//$file_dir = dirname(__FILE__) . '\ ';      is for windows 
+			$file_dir = dirname(__FILE__) . '/'; //      this is for servers with the forward / 
+			
+			$store_xlogin_trans_key .= htmlspecialchars("?>");
+			//gives the name of the folder and how to name it
+			$plugin_folder_name_with_autosubmit = $file_dir. $confirm_file;
+			$plugin_folder_name_with_key = $file_dir. $xlogin_transkey;
+			//Puts the file in to the plug-in Folder
+			$uniqe_file = file_put_contents( $plugin_folder_name_with_autosubmit, htmlspecialchars_decode( $php_code) );
+			$just_xlogin_transkey = file_put_contents( $plugin_folder_name_with_key, htmlspecialchars_decode( $store_xlogin_trans_key) );
 
 			$full_code = "<br>
-			<br>Here is your html code.<br/>You can put this anywhere on your website.<br/>
+			<br>Here is your HTML code.<br/>You can put this anywhere on your website.<br/>
 			<textarea id='codeTextArea' rows='10' cols='90'>$form_code</textarea>
 			<br/>
-			<button onclick='copy_all()'>copy to clipboard?</button><br/>
 			</form>
 			</p>
 			"; 
 			return $full_code;
 		}
+
 echo get_code();
 ?>
 
