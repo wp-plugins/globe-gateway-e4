@@ -17,15 +17,15 @@ This is for Globe Gateway e4 Hosted Payment Page. This is something I created to
 
 == Screenshots ==
 
-1. screenshot1.png
-2. screenshot2.png
+1. screenshot-1.png
+2. screenshot-2.png
 Once the plug-in is installed and activated. 
-3. screenshot3.png
+3. screenshot-3.png
 Under the setting tab they will need to click on Global Gateway e4 Hosted Payment Page.
-4. screenshot4.png
+4. screenshot-4.png
 Next, it will ask for the X Login and Transaction Key which can be found on the hosted payment page.  Next, pick the fields you want displayed. 
 Once you select the fields you want displayed, you will need to copy the HTML code.
-5. screenshot5.png
+5. screenshot-5.png
 
 == Installation ==
 
