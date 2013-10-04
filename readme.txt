@@ -1,13 +1,13 @@
 === Global Gateway e4 | Hosted Payment Page | ===
 
 Author: Donnell Council
-Version: 0.0.4
+Version: 0.0.6
 Author URI: http://www.djkidnyce.com
 Contributors: DonnellC
 Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4, First Data
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 0.0.5
+Stable tag: 0.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,15 +17,15 @@ This is for Globe Gateway e4 Hosted Payment Page. This is something I created to
 
 == Screenshots ==
 
-1. screenshot-1.png
-2. screenshot-2.png
+1. screenshot1.png
+2. screenshot2.png
 Once the plug-in is installed and activated. 
-3. screenshot-3.png
+3. screenshot3.png
 Under the setting tab they will need to click on Global Gateway e4 Hosted Payment Page.
-4. screenshot-4.png
+4. screenshot4.png
 Next, it will ask for the X Login and Transaction Key which can be found on the hosted payment page.  Next, pick the fields you want displayed. 
 Once you select the fields you want displayed, you will need to copy the HTML code.
-5. screenshot-5.png
+5. screenshot5.png
 
 == Installation ==
 
@@ -33,12 +33,12 @@ This section describes how to install the plugin and get it working.
 
 
 1. Upload `Global Gateway e4.zip` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+2. Activate the plug-in through the 'Plug-ins' menu in WordPress
 3.You will need to create a hosted payment page in your Globe Gateway e4 account. 
 4.Once created you want to click on your payment page id.
 5.Next click on tap number 8 Hash Calculator. 
 6.From there you want to copy the X Login and Transaction Key.
-7.Slect the field you want to display on your site.
+7.Select the field you want to display on your site.
 8.Copy the the HTML code that was created.
 9.Paste the HTML code on the page you want to take payment on.
 
@@ -53,11 +53,20 @@ This section describes how to install the plugin and get it working.
 * Added screen shots.
 
 = 0.0.4 =
-* The Plugin now creates 2 files in the plug-in directory. 
+* The Plug-in now creates 2 files in the plug-in directory. 
 	One holding the xlogin and transaction key, the 2nd one only submitting the transaction.
 	This is for added for security
 * You are now able to view the X Login and Transaction Key from the file.
 * Fixed uninstall. When you remove the plug-in, all the file that came with the plug-in will be deleted.
 * Made the Amount field  required in the HTML code.
 = 0.0.5 =
-* Fixed miskeyed code. 
+* Fixed mis-keyed code. 
+
+= 0.0.6 =
+* Updated SHA-1 HMAC code.
+* Added the ability to process pre-authorizations.
+* Added the ability to pick a color to appear on the hosted payment page.
+* Added the ability to enter a Logo URL to be sent to the payment page.
+* Added the ability to get a copy of the customer's confirmation email.
+* Added a date picker for recurring transactions. 
+* Now required fields are working in Google Chrome.
