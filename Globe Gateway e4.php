@@ -430,7 +430,7 @@ function get_code(){
 			htmlspecialchars("<tr><td>Recurring Amount:</td><td><input type='text' name='x_recurring_billing_amount'></td></tr>")."\n";
 			
 			//strings for php codes
-			$find_not_needed = [' '];
+			$find_not_needed = (' ');
 			$replace_all = ('');
 			$x_login_raw = $_POST['x_login_raw'];
 			$x_login = str_replace($find_not_needed,$replace_all,$x_login_raw);
