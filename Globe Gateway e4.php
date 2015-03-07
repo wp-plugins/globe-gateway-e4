@@ -266,7 +266,13 @@ HMAC Calculation
 <input type='hidden' name='js_recurring' value='<?php echo plugins_url('globe-gateway-e4/' .'js/recurring/recurring.js' );?>'>
 <input class='button-primary' type='submit' value='Generate Code' />
 </form>
-<h5 class="alignright" >Created By: Donnell Council | For Support : <a href="http://wordpress.org/support/plugin/globe-gateway-e4">Click Here </a></h5>
+<h5 class="alignright" >Created By: Donnell Council
+<br>
+For Support : <br>
+<a target="_blank" href="http://wordpress.org/support/plugin/globe-gateway-e4">On Wordpress</a>
+<br>
+<a target="_blank" href="https://www.facebook.com/GlobalGatewayE4">On Facebook</a>
+</h5>
 </div>
 
 <?php
