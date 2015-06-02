@@ -80,3 +80,4 @@ This section describes how to install the plugin and get it working.
 * Added user 3 field.
 * Added comments field.
 * Added the ability to copy the billing address into the Shipping address fields.
+* Note: Updating the plugin will remove your current working copy. You will need to get your Payment Page ID, Transaction Key, and other fields you have filled out. 
