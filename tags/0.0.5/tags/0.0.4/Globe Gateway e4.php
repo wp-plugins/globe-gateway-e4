@@ -4,7 +4,7 @@ Plugin Name: Global Gateway e4 | Hosted Payment Page |
 Plugin URI: http://www.djkidnyce.com/plug-ins/
 Description: This is for Global Gateway e4 Hosted Payment Page. Global Gateway Made easier for WordPress users to set-up a pay button on their website.
 Author: Donnell Council
-Version: 1.0
+Version: 0.0.4
 Author URI: http://www.djkidnyce.com
 */
 add_action('admin_menu', 'e4hpp_admin_actions');
@@ -17,127 +17,46 @@ function e4hpp_admin()
 $dir = plugin_dir_path( __FILE__ );
 $the_file = 'xlogin_transkey.php';
 $filename = $dir. $the_file;
+
 if (file_exists($filename)) 
 {
 include($dir. $the_file);
 }
 ?>
-<script type="text/javascript">
-function wantedchecked() {
-    if (document.getElementById('recurring_b_f_c').checked) {
-        document.getElementById('recurring_billing_fields_checked').style.visibility = 'visible';	
-    }
-    else document.getElementById('recurring_billing_fields_checked').style.visibility = 'hidden';
-
-	if (document.getElementById('header').checked) {
-			document.getElementById('header_checked').style.visibility = 'visible';
-	}
-	else document.getElementById('header_checked').style.visibility = 'hidden';
-	
-	if (document.getElementById('back_color').checked) {
-        document.getElementById('back_color_checked').style.visibility = 'visible';	
-    }
-    else document.getElementById('back_color_checked').style.visibility = 'hidden';
-	
-	if (document.getElementById('merchant_email_checked').checked) {
-        document.getElementById('merchant_email').style.visibility = 'visible';	
-    }
-    else document.getElementById('merchant_email').style.visibility = 'hidden';
-
-	if (document.getElementById('user_1_checked').checked) {
-        document.getElementById('x_user_1').style.visibility = 'visible';	
-    }
-    else document.getElementById('x_user_1').style.visibility = 'hidden';
-
-	if (document.getElementById('user_2_checked').checked) {
-        document.getElementById('x_user_2').style.visibility = 'visible';	
-    }
-    else document.getElementById('x_user_2').style.visibility = 'hidden';
-
-	if (document.getElementById('user_3_checked').checked) {
-        document.getElementById('x_user_3').style.visibility = 'visible';	
-    }
-    else document.getElementById('x_user_3').style.visibility = 'hidden';
-
-	}
-	
-</script>
-
-<link rel="shortcut icon" href="<?php echo plugins_url('globe-gateway-e4/' .'images/payeezy_favicon.png' ); ?>" />
-<link href="<?php echo plugins_url('globe-gateway-e4/' .'css/GobleGateway.css' ); ?>" media="screen" rel="stylesheet" type="text/css" /> 
-<script type="text/javascript" src="<?php echo plugins_url('globe-gateway-e4/' .'js/jscolor/jscolor.js' ); ?>"></script>
 	<div class="wrap">
-	<div id="hd">
-		<div id="brand-change-advisory">
-		<p id="gge4">Global Gateway e4<sup>SM</sup> is now called</p>
-      <p id="payeezy">Payeezy<sup>SM</sup> Gateway</p>
-    </div>
-
-
-<form name='verify_login_transkey' method='POST' action='<?php echo $_SERVER['REQUEST_URI']; ?>'>
-<br>Payment Page ID: <input name="x_login_raw" value="<?php echo $x_login; ?>" size="30" autocomplete="off" required autofocus/><br/>
-<br>Transaction Key: <input name="transaction_key_raw" value="<?php echo $transaction_key; ?>" size="25" autocomplete="off" required/><br/>
-<input type='checkbox' name='attributes[]' value='2'> Company</input><br/>
-<input type='checkbox' name='attributes[]' value='1'> First Name and Last Name</input><br/>
-<input type='checkbox' name='attributes[]' value='3'> Billing Address Fields</input><br/>
-<input type='checkbox' name='attributes[]' value='7'> Country</input><br/>
-<input type='checkbox' name='attributes[]' value='22'> Phone Number</input><br/>
-<input type='checkbox' name='attributes[]' value='23'> Fax Number</input><br/>
-<input type='checkbox' name='attributes[]' value='4'> Shipping Address Fields</input><br/>
+	<h3>Global Gateway e4 Hosted Payment Page</h3>
+	<table class="widefat">
+	<thead>
+	<tr>
+<form name='verify_login_transkey' method='POST' action='<?php echo $_SERVER['REQUEST_URI']; ?>' onsubmit='return validateForm()'>
+<br>X Login: <input name="x_login" value="<?php echo $x_login; ?>" size="30" autocomplete="off" required/><br/>
+<br>Transaction Key: <input name="transaction_key" value="<?php echo $transaction_key; ?>" size="25" autocomplete="off" required/><br/>
+<input type='checkbox' name='attributes[]' value='2'>Company</input><br/>
+<input type='checkbox' name='attributes[]' value='1'>First Name and Last Name</input><br/>
+<input type='checkbox' name='attributes[]' value='3'>Billing Address Fields</input><br/>
+<input type='checkbox' name='attributes[]' value='4'>Shipping Address Fields</input><br/>
 <!-- 
-<input type='checkbox' name='attributes[]' value='5'> Level 3 Fields</input><br />
+<input type='checkbox' name='attributes[]' value='5'>Level 3 Fields</input><br />
+<input type='checkbox' name='attributes[]' value='6'>Zip</input><br />
 -->
-<input type='checkbox' name='attributes[]' value='8'> Email</input><br/>
-<input type='checkbox' name='attributes[]' value='9'> Invoice Number</input><br/>
-<input type='checkbox' name='attributes[]' value='10'> PO Number</input><br/>
-<input type='checkbox' name='attributes[]' value='11'> Reference 3</input><br/>
-
-<input type='checkbox' name='attributes[]' value='24' onclick='javascript:wantedchecked();' id='user_1_checked'> Nameable Field 1</input><br/>
-<div id="x_user_1" style="visibility:hidden">
-Change to: <input type='text' id='x_user_1' name='user_1' value='<?php echo $x_user1; ?>'/>
-</div>
-
-<input type='checkbox' name='attributes[]' value='25' onclick='javascript:wantedchecked();' id='user_2_checked'> Nameable Field 2</input><br/>
-<div id="x_user_2" style="visibility:hidden">
-Change to: <input type='text' id='x_user_2' name='user_2' value='<?php echo $x_user2; ?>'/>
-</div>
-
-<input type='checkbox' name='attributes[]' value='26' onclick='javascript:wantedchecked();' id='user_3_checked'> Nameable Field 3</input><br/>
-<div id="x_user_3" style="visibility:hidden">
-Change to: <input type='text' id='x_user_3' name='user_3' value='<?php echo $x_user3; ?>'/>
-</div>
-
-
-
-<input type='checkbox' name='attributes[]' value='27'> Description Or Comments</input><br/>
-<input type='checkbox' name='attributes[]' value='20' onclick='javascript:wantedchecked();' id='header'> Show Your Logo On The Payment Page</input><br/>
-<div id="header_checked" style="visibility:hidden">
-Logo URL: <input type='text' id='x_logo_url' name='x_logo_url_raw' value='<?php echo $x_logo_url; ?>' size="100"/></div>
-
-<input type='checkbox' name='attributes[]' value='15' onclick='javascript:wantedchecked();' id='recurring_b_f_c'> Recurring Billing Fields</input><br/>
-<div id="recurring_billing_fields_checked" style="visibility:hidden">
-Recurring Billing ID: <input type='text' id='x_recurring_billing_id' name='x_recurring_billing_id_raw' value='<?php echo $x_recurring_billing_id; ?>' size="30"/></div>
-
-<input type='checkbox' name='attributes[]' value='21' onclick='javascript:wantedchecked();' id='back_color'> Background Color For Payment Page</input><br/>
-<div id="back_color_checked" style="visibility:hidden">
-Pick Your Background Color: <input type='text' id='x_color_background' name='x_color_background' value='<?php echo $x_color_background; ?>' class="color" size="7" readonly/></div>
-
-<input type='checkbox' name='attributes[]' value='6' onclick='javascript:wantedchecked();' id='merchant_email_checked'> Merchant E-Mail</input><br/>
-<div id="merchant_email" style="visibility:hidden">
-E-Mail: <input type='text' id='x_merchant_email' name='x_merchant_email_raw' value='<?php echo $x_merchant_email; ?>' size="50"/>
-<h5>Copy of the customer confirmation email should be sent to.</h5>
-</div>
-
+<input type='checkbox' name='attributes[]' value='7'>Country</input><br/>
+<input type='checkbox' name='attributes[]' value='8'>Email</input><br/>
+<input type='checkbox' name='attributes[]' value='9'>Invoice Number</input><br/>
+<input type='checkbox' name='attributes[]' value='10'>PO Number</input><br/>
+<input type='checkbox' name='attributes[]' value='11'>Reference 3</input><br/>
+<input type='checkbox' name='attributes[]' value='15'>Recurring Billing Fields</input><br/>
 Live or Demo
 <select name="live_demo" id="live_demo">
 <option value="https://globalgatewaye4.firstdata.com/payment" selected>Live</option>
 <option value="https://demo.globalgatewaye4.firstdata.com/payment">Demo</option>
-</select></br>
-Transaction Type
-<select name="x_type" id="x_type">
-<option value="AUTH_CAPTURE" selected>Purchase/Sale</option>
-<option value="AUTH_ONLY">Pre-Authorization</option>
-</select></br>
+</select>
+<h5>Required Fields</h5>
+<input type='checkbox' name='attributes[]' value='12' checked onclick='return false'>Amount</input><br/>
+<input type='checkbox' name='attributes[]' value='16' checked onclick='return false'>FP Sequence</input><br/>
+<input type='checkbox' name='attributes[]' value='17' checked onclick='return false'>Timestamp</input><br/>
+<input type='checkbox' name='attributes[]' value='18' checked onclick='return false'>HMAC Data</input><br/>
+<input type='checkbox' name='attributes[]' value='19' checked onclick='return false'>Hash</input><br/>
+
 Currency
 <select name="currency_code" id="currency_code">
 				<option value="ADF">	Andorran Franc    (ADF)</option>
@@ -295,38 +214,17 @@ Currency
 				<option value="YUN">	Yugoslav Dinar    (YUN)</option>
 				<option value="ZAR">	South African Rand    (ZAR)</option>
 				<option value="ZMK">	Zambian Kwacha    (ZMK)</option>
-</select><h5>Please Note:The Currency Code MUST agree with the currency of the payment page.</h5>
-<h5>Required Fields</h5>
-<input type='checkbox' name='attributes[]' value='12' checked onclick='return false'> Amount</input><br/>
-<input type='checkbox' name='attributes[]' value='16' checked onclick='return false'> FP Sequence</input><br/>
-<input type='checkbox' name='attributes[]' value='17' checked onclick='return false'> Timestamp</input><br/>
-<input type='checkbox' name='attributes[]' value='18' checked onclick='return false'> HMAC Data</input><br/>
-<input type='checkbox' name='attributes[]' value='19' checked onclick='return false'> Hash</input><br/>
 
+</select>
+<h5>Please Note:The Currency Code MUST agree with the currency of the payment page.</h5>
 HMAC Calculation
 <select name="hmac_calculation" id="hmac_calculation">
 <option value="MD5" selected>MD5</option>
-<option value="SHA1">SHA-1</option>
-</select></br>
-<input type='hidden' name='js_cal_css' value='<?php echo plugins_url('globe-gateway-e4/' .'js/calendar/tcal.css' );?>'>
-<input type='hidden' name='js_cal_js' value='<?php echo plugins_url('globe-gateway-e4/' .'js/calendar/tcal.js' );?>'>
-<input type='hidden' name='js_recurring' value='<?php echo plugins_url('globe-gateway-e4/' .'js/recurring/recurring.js' );?>'>
-<input type='hidden' name='js_address' value='<?php echo plugins_url('globe-gateway-e4/' .'js/address/address.js' );?>'>
-<input class='button-primary' type='submit' value='Generate Code' />
+<option value="SHA-1">SHA-1</option>
+</select>
+<input type='submit' value='Generate Code' />
 </form>
-<h5 class="alignright" >Created By: Donnell Council
-<br>
-For Support : <br>
-<a target="_blank" href="http://wordpress.org/support/plugin/globe-gateway-e4">On Wordpress</a>
-<br>
-<a target="_blank" href="https://www.facebook.com/pages/Payeeze/720849568025724">On Facebook</a>
-<br>
-Love this plug-in please leave a
-<a target="_blank" href="https://wordpress.org/support/view/plugin-reviews/globe-gateway-e4#postform">Review</a>
-</h5>
 </div>
-
-
 <?php
 function get_code(){
 		//get there selected checkboxes
@@ -338,10 +236,9 @@ function get_code(){
 		}else{
 		
 			//set strings that will be used after the user checks the boxes
-			
 			$first_last = htmlspecialchars("<tr><td>First Name:</td><td><input type='text'name='x_first_name' required></td></tr>")."\n".htmlspecialchars("<tr><td>Last Name:</td><td><input type='text'name='x_last_name' required></td></tr>")."\n";
-			$x_company = htmlspecialchars("<tr><td>Company:</td><td><input type='text'name='x_company' required></td></tr>")."\n";
-			$x_address = htmlspecialchars("<th>Billing Address</th><th></th><tr><td>Billing Address:</td><td><input type='text'name='x_address' required></td></tr>").htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_city' required></td></tr>")."\n". 
+			$x_company = htmlspecialchars("<tr><td>Company:</td><td><input type='text'name='x_company'></td></tr>")."\n";
+			$x_address = htmlspecialchars("<th>Billing Address Fields</th><tr><td>Address:</td><td><input type='text'name='x_address'></td></tr>").htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_city'/></td></tr>")."\n". 
 																htmlspecialchars("<tr><td>State</td><td><select name='x_state' id='x_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
@@ -398,10 +295,8 @@ function get_code(){
 																<option value='WV'> WV </option>
 																<option value='WY'> WY </option>
 																</select></tr></td>")."\n". 
-																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_zip' required></td></tr>")."\n";
-			$js_address =$_POST['js_address'];
-			$x_ship_address =  htmlspecialchars("<th>Shipping Address </th><th></th><script type='text/javascript' src=\"$js_address\"></script><tr><td>Same as Billing Adddress</td><td><input type='checkbox' name='billing_to_shipping_name' onclick='copy_address(this.form)'></td><tr><td>Address:</td><td><input type='text'name='x_ship_to_address' required></td></tr>")."\n". 
-			htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_ship_to_city' required></td></tr>")."\n". 
+																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_zip'></td></tr>")."\n";
+			$x_ship_address =  htmlspecialchars("<th>Shipping Address Fields</th><tr><td>Address:</td><td><input type='text'name='x_ship_to_address'></td></tr>")."\n". htmlspecialchars("<tr><td>City:</td><td><input type='text'name='x_ship_to_city'/></td></tr>")."\n". 
 																htmlspecialchars("<tr><td>State</td><td><select name='x_ship_to_state' id='x_ship_to_state'>
 																<option value='..' selected='1'>
 																<option value='AK'> AK </option>
@@ -458,78 +353,43 @@ function get_code(){
 																<option value='WV'> WV </option>
 																<option value='WY'> WY </option>
 																</select></td></tr>")."\n". 
-																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_ship_to_zip' required></td></tr>")."\n";
+																htmlspecialchars("<tr><td>Zip Code:</td><td><input type='text'name='x_ship_to_zip'></td></tr>")."\n";
 			$level_3_Fields = htmlspecialchars("<br>Tax Exempt<select name='x_tax_exempt' id='x_tax_exempt'>
 																<option value='..' selected='1'>
-																<option value='TRUE'> Yes </option>
+																<option value='TRUE '> Yes </option>
 																<option value='FALSE'> No </option>
 																</select>")."\n".
-																htmlspecialchars("<br>Tax  Amount:<input type='text' name='x_tax'>")."\n".
-																htmlspecialchars("<br>Freight:<input type='text' name='x_freight'>")."\n".
-																htmlspecialchars("<br>Duty:<input type='text' name='x_duty'>")."\n".
-																htmlspecialchars("<br>Discount amount:<input type='text' name='discount_amount'>")."\n";
-			$x_country = htmlspecialchars("<tr><td>Country:</td><td><input type='text' name='' required></td></tr>")."\n";
-			$x_email = htmlspecialchars("<tr><td>E-Mail:</td><td><input type='text' name='x_email' required></td></tr>")."\n";
-			$x_invoice_num = htmlspecialchars("<tr><td>Invoice Number:</td><td><input type='text' name='x_invoice_num' required></td></tr>")."\n";
-			$x_po_num = htmlspecialchars("<tr><td>Po Number:</td><td><input type='text' name='x_po_num' required></td></tr>")."\n";
-			$x_reference_3 = htmlspecialchars("<tr><td>Reference 3:</td><td><input type='text' name='x_reference_3' required></td></tr>")."\n";
-			$x_amount = htmlspecialchars("<tr><td>Amount:</td><td><input type='text' name='x_amount' required></td></tr>")."\n";
-			$js_cal_css =$_POST['js_cal_css'];
-			$js_cal_js =$_POST['js_cal_js'];
-			$js_recurring =$_POST['js_recurring'];
+																htmlspecialchars("<br>Tax  Amount:<input type='text'name='x_tax'>")."\n".
+																htmlspecialchars("<br>Freight:<input type='text'name='x_freight'>")."\n".
+																htmlspecialchars("<br>Duty:<input type='text'name='x_duty'>")."\n".
+																htmlspecialchars("<br>Discount amount:<input type='text'name='discount_amount'>")."\n";
+			$x_zip = htmlspecialchars("<br>Zip Code:<input type='text'name='x_zip'>")."\n";
+			$x_country = htmlspecialchars("<tr><td>Country:</td><td><input type='text'name=''></td></tr>")."\n";
+			$x_email = htmlspecialchars("<tr><td>E-Mail:</td><td><input type='text'name='x_email'></td></tr>")."\n";
+			$x_invoice_num = htmlspecialchars("<tr><td>Invoice Number:</td><td><input type='text'name='x_invoice_num'></td></tr>")."\n";
+			$x_po_num = htmlspecialchars("<tr><td>Po Number:</td><td><input type='text'name='x_po_num'></td></tr>")."\n";
+			$x_reference_3 = htmlspecialchars("<tr><td>Reference 3:</td><td><input type='text'name='x_reference_3'></td></tr>")."\n";
+			$x_amount = htmlspecialchars("<tr><td>Amount:</td><td><input type='text'name='x_amount' required></td></tr></table>")."\n";
 			$x_recurring_billing_fields = 
-			htmlspecialchars("<script type='text/javascript' src=\"$js_cal_js\"></script>")."\n".
-			htmlspecialchars("<link rel='stylesheet' type='text/css' href=\"$js_cal_css\"/>")."\n".
-			htmlspecialchars("<th>Recurring Billing</th><th></th><tr><td>Recurring ?</td><td>
-			<select name='recurring' id='recurring'>
-			<option value='FALSE'>No</option>
-			<option value='TRUE'>Yes</option></select>
-			</td></tr>")."\n".
-			htmlspecialchars("<tr><td>Start Date</td><td><input type='text' name='x_recurring_billing_start_date' class='tcal'></td></tr>")."\n".
-			htmlspecialchars("<tr><td>End Date</td><td><input type='text' name='x_recurring_billing_end_date' class='tcal'></td></tr>")."\n".
-			htmlspecialchars("<tr><td>Recurring Amount:</td><td><input type='text' name='x_recurring_billing_amount'></td></tr>")."\n";
-			//New fields 
-			$x_phone = htmlspecialchars("<tr><td>Phone Number:</td><td><input type='text' name='x_phone' required></td></tr>")."\n";
-			$x_fax = htmlspecialchars("<tr><td>Fax Number:</td><td><input type='text' name='x_fax' required></td></tr>")."\n";
-			// User name field names will be changed. 
-			$user_1 =$_POST['user_1'];
-			$user_2 =$_POST['user_2'];
-			$user_3 =$_POST['user_3'];
-			$x_user1 = htmlspecialchars("<tr><td>$user_1:</td><td><input type='text' name='x_user1' required></td></tr>")."\n";
-			$x_user2 = htmlspecialchars("<tr><td>$user_2:</td><td><input type='text' name='x_user2' required></td></tr>")."\n";
-			$x_user3 = htmlspecialchars("<tr><td>$user_3:</td><td><input type='text' name='x_user3' required></td></tr>")."\n";
-			// Comments or Description Maybe change the name of the field option. 
-			$x_description = htmlspecialchars("<tr><td>Comments or Description</td><td><textarea name='x_description' value='' ></textarea></td></tr>")."\n";
+			htmlspecialchars("<th>Recurring Billing Fields</th><tr><td>Recurring ?</td><td><input type='checkbox'name='x_recurring_billing' value='TRUE'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Recurring Billing ID</td><td><input type='text'name='x_recurring_billing_id'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Start Date Format: YYYYMMDD</td><td><input type='text'name='x_recurring_billing_start_date'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>End Date Format: YYYYMMDD</td><td><input type='text'name='x_recurring_billing_end_date'></td></tr>")."\n".
+			htmlspecialchars("<tr><td>Recurring Amount</td><td><input type='text'name='x_recurring_billing_amount'></td></tr>")."\n";
 			
 			//strings for php codes
-			$find_not_needed = (' ');
-			$replace_all = ('');
-			$x_login_raw = $_POST['x_login_raw'];
-			$x_login = str_replace($find_not_needed,$replace_all,$x_login_raw);
-			
-			$transaction_key_raw = $_POST['transaction_key_raw'];
-			$transaction_key = str_replace($find_not_needed,$replace_all,$transaction_key_raw);
-			
-			$x_recurring_billing_id_raw = $_POST['x_recurring_billing_id_raw'];
-			$x_recurring_billing_id = str_replace($find_not_needed,$replace_all,$x_recurring_billing_id_raw);
-			
+			$x_login = $_POST['x_login']; 
+			$transaction_key = $_POST['transaction_key'];
 			$x_currency_code =$_POST['currency_code'];
 			$hmac_calculation =$_POST['hmac_calculation'];
 			$live_demo =$_POST['live_demo'];
-			$x_type =$_POST['x_type'];
 			$time_stamp = time();
-			// Confirm file and transaction key
 			$confirm_file = 'confirm'.'.php';
-			$my_file = plugins_url('globe-gateway-e4/') . $confirm_file;
+			$my_file = plugins_url('global-gateway-e4/') . $confirm_file;
 			$xlogin_transkey = 'xlogin_transkey'.'.php';
-			$xlogin_transkey_location = plugins_url('globe-gateway-e4/') . $xlogin_transkey;
-			// Hosted payment page design
-			$x_logo_url_raw =$_POST['x_logo_url_raw'];
-			$x_logo_url = str_replace($find_not_needed,$replace_all,$x_logo_url_raw);
-			$x_color_background =$_POST['x_color_background'];
-			// E-Mail Setting Fields
-			$x_merchant_email_raw =$_POST['x_merchant_email_raw'];
-			$x_merchant_email = str_replace($find_not_needed,$replace_all,$x_merchant_email_raw);
+			$xlogin_transkey_location = plugins_url('global-gateway-e4/') . $xlogin_transkey;
+
+			
 			//$filename = uniqid('confirm', true) . '.php';
 			
 			$php_first_last = "\$x_first_name = \$_POST['x_first_name'];\n\$x_last_name = \$_POST['x_last_name']; \n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_first_name\" value=\"' . \$x_first_name . '\">' );")."\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_last_name\" value=\"' . \$x_last_name . '\">' );")."\n";
@@ -547,41 +407,28 @@ function get_code(){
 			"\$x_freight = \$_POST['x_freight'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_freight\" value=\"' . \$x_freight . '\">' );")."\n".
 			"\$x_duty = \$_POST['x_duty'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_duty\" value=\"' . \$x_duty . '\">' );")."\n".
 			"\$discount_amount = \$_POST['discount_amount'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"discount_amount\" value=\"' . \$discount_amount . '\">' );")."\n";
-			$php_x_merchant_email = htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_merchant_email\" value=\"' . \$x_merchant_email . '\">' );")."\n";
+			$php_x_zip = "\$x_zip = \$_POST['x_zip'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_zip\" value=\"' . \$x_zip . '\">' );")."\n";
 			$php_x_country= "\$x_country = \$_POST['x_country'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_country\" value=\"' . \$x_country . '\">' );")."\n";
 			$php_x_email = "\$x_email = \$_POST['x_email'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_email\" value=\"' . \$x_email . '\">' );")."\n";
 			$php_x_invoice_num = "\$x_invoice_num = \$_POST['x_invoice_num'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_invoice_num\" value=\"' . \$x_invoice_num . '\">' );")."\n";
 			$php_x_po_num = "\$x_po_num = \$_POST['x_po_num'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_po_num\" value=\"' . \$x_po_num . '\">' );")."\n";
 			$php_x_reference_3 = "\$x_reference_3 = \$_POST['x_reference_3'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_reference_3\" value=\"' . \$x_reference_3 . '\">' );")."\n";
 			$php_x_amount = "\$x_amount = \$_POST['x_amount'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_amount\" value=\"' . \$x_amount . '\">' );")."\n";
-			$php_x_recurring_billing_fields = "if ( \$recurring= \$_POST['recurring'] == 'TRUE'){
-			//code to be executed if condition is true;
-\$x_recurring_billing = 'TRUE'; \n
-\$x_recurring_billing_start_date = \$_POST['x_recurring_billing_start_date']; \n
-\$x_recurring_billing_end_date = \$_POST['x_recurring_billing_end_date']; \n
-\$x_recurring_billing_amount = \$_POST['x_recurring_billing_amount']; \n"
+			$php_x_recurring_billing_fields = "
+			\$x_recurring_billing = \$_POST['x_recurring_billing'];\n
+			\$x_recurring_billing_id = \$_POST['x_recurring_billing_id']; \n
+			\$x_recurring_billing_start_date = \$_POST['x_recurring_billing_start_date']; \n
+			\$x_recurring_billing_end_date = \$_POST['x_recurring_billing_end_date']; \n
+			\$x_recurring_billing_amount = \$_POST['x_recurring_billing_amount']; \n"
 			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing\" value=\"' . \$x_recurring_billing . '\">' );")."\n"
 			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing_id\" value=\"' . \$x_recurring_billing_id . '\">' );")."\n"
 			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing_start_date\" value=\"' . \$x_recurring_billing_start_date . '\">' );")."\n"
 			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing_end_date\" value=\"' . \$x_recurring_billing_end_date . '\">' );")."\n"
-			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing_amount\" value=\"' . \$x_recurring_billing_amount . '\">' );}else{\n\n}")."\n";
-			// New Fields 
-			$php_x_phone = "\$x_phone = \$_POST['x_phone'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_phone\" value=\"' . \$x_phone . '\">' );")."\n";
-			$php_x_fax = "\$x_fax = \$_POST['x_fax'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_fax\" value=\"' . \$x_fax . '\">' );")."\n";
-			$php_x_user1 = "\$x_user1 = \$_POST['x_user1'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_user1\" value=\"' . \$x_user1 . '\">' );")."\n";
-			$php_x_user2 = "\$x_user2 = \$_POST['x_user2'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_user2\" value=\"' . \$x_user2 . '\">' );")."\n";
-			$php_x_user3 = "\$x_user3 = \$_POST['x_user3'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_user3\" value=\"' . \$x_user3 . '\">' );")."\n";
-			$php_x_description = "\$x_description = \$_POST['x_description'];\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_description\" value=\"' . \$x_description . '\">' );")."\n";
-
-
+			.htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_recurring_billing_amount\" value=\"' . \$x_recurring_billing_amount . '\">' );")."\n";
 			$php_x_fp_sequence = "\$x_fp_sequence = rand(1000, 100000) + 123456;\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_fp_sequence\" value=\"' . \$x_fp_sequence . '\">' );")."\n";
 			$php_x_fp_timestamp = "\$x_fp_timestamp = time();\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_fp_timestamp\" value=\"' . \$x_fp_timestamp . '\">' );")."\n";															
 			$php_hmac_data = "\$hmac_data = \$x_login . \"^\" . \$x_fp_sequence . \"^\". \$x_fp_timestamp . \"^\" . \$x_amount . \"^\" . \$x_currency_code;\n";
 			$php_x_fp_hash = "\$x_fp_hash = hash_hmac('$hmac_calculation', \$hmac_data, \$transaction_key);\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_fp_hash\" value=\"' . \$x_fp_hash . '\" size=\"50\">' );")."\n".htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_login\" value=\"' . \$x_login . '\">' );")."\n";
-			$php_x_logo_url = htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_logo_url\" value=\"' . \$x_logo_url . '\">' );")."\n";
-			$php_x_color_background = htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_color_background\" value=\"' . \$x_color_background . '\">' );")."\n";
-			
-			
 			
 			//set a code separate from what the php will be so it can be added together later
 			$form_code = htmlspecialchars("<table align='center' border='1'>")."\n" .htmlspecialchars("<form method='POST' action='$my_file'>")."\n";
@@ -591,26 +438,18 @@ function get_code(){
 			$php_code = htmlspecialchars(
 			"<head>
 <title>Confirmation</title>
-<meta name='author' content='DonnellC'>
-<meta name='description' content='This was created By:DonnellC Code-GEN'>
-<meta name='keywords' content='bd0f1c08b0efcff31efb4867d9176e28'>
 <style TYPE=\"text/css\"> #document { width: 700px; margin-left: auto; margin-right: auto; text-align: center; margin-top: 30px; } body { font: 1.25em arial,helvetica,sans-serif; color:#999; } </style> 
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />
 <SCRIPT LANGUAGE=\"JavaScript\"> setTimeout('document.confirm.submit()',10); 
 </SCRIPT> </head> <body> <div id=\"document\"> 
 <form name=\"confirm\" id=\"confirm\" action=\"$live_demo\">".
 "\n<?php
-//Created By: Donnell Council | | If you are looking at this. You seem to know what you are doing.//
+//Created By: Donnell Council | | If you are looking at this. You seem to know what you are doing. Need help setting up the recurring correctly. Contact me.//
 srand(time());			
 require('./xlogin_transkey.php'); 
-\$x_type = \"$x_type\";
 \$x_currency_code = \"$x_currency_code\";").
-htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_currency_code\" value=\"' . \$x_currency_code . '\">' );")."\n".
-htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_type\" value=\"' . \$x_type . '\">' );")."\n";
-			// Stores the info the user entered
-			$store_xlogin_trans_key = htmlspecialchars("<?php")."\n" .
-			htmlspecialchars("\$x_login = \"$x_login\";\n\$transaction_key = \"$transaction_key\";\n\$x_recurring_billing_id = \"$x_recurring_billing_id\";\n\$x_logo_url = \"$x_logo_url\";\n\$x_color_background = \"$x_color_background\";\n\$x_merchant_email = \"$x_merchant_email\";\n");
-			
+htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_currency_code\" value=\"' . \$x_currency_code . '\">' );")."\n";
+			$store_xlogin_trans_key = htmlspecialchars("<?php")."\n" .htmlspecialchars("\$x_login = \"$x_login\"; \$transaction_key = \"$transaction_key\"; ");
 			
 			
 			if ($arrylen == 1){	//check if they only selected one
@@ -635,7 +474,8 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_type\" value=\"' . \$x_
 					$php_code .= $php_level_3_Fields;
 				}
 				if($code_wanted[0] == 6){
-					$php_code .= $php_x_merchant_email;
+					$form_code .= $x_zip;
+					$php_code .= $php_x_zip;
 				}
 				if($code_wanted[0] == 7){
 					$form_code .= $x_country;
@@ -683,36 +523,6 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_type\" value=\"' . \$x_
 				if($code_wanted[0] == 19){
 					$php_code .= $php_x_fp_hash;
 				}
-				if($code_wanted[0] == 20){
-					$php_code .= $php_x_logo_url;
-				}
-				if($code_wanted[0] == 21){
-					$php_code .= $php_x_color_background;
-				}
-				if($code_wanted[0] == 22){
-					$form_code .= $x_phone;
-					$php_code .= $php_x_phone;
-				}
-				if($code_wanted[0] == 23){
-					$form_code .= $x_fax;
-					$php_code .= $php_x_fax;
-				}
-				if($code_wanted[0] == 24){
-					$form_code .= $x_user1;
-					$php_code .= $php_x_user1;
-				}
-				if($code_wanted[0] == 25){
-					$form_code .= $x_user2;
-					$php_code .= $php_x_user2;
-				}
-				if($code_wanted[0] == 26){
-					$form_code .= $x_user3;
-					$php_code .= $php_x_user3;
-				}
-				if($code_wanted[0] == 27){
-					$form_code .= $x_description;
-					$php_code .= $php_x_description;
-				}
 
 			}else{						//if the selected multiple options for the form
 				for ($x = 0; $x < $arrylen; $x++){
@@ -737,7 +547,8 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_type\" value=\"' . \$x_
 						$php_code .= $php_level_3_Fields;
 					}
 					if($code_wanted[$x] == 6){
-						$php_code .= $php_x_merchant_email;
+						$form_code .= $x_zip;
+						$php_code .= $php_x_zip;
 					}
 					if($code_wanted[$x] == 7){
 						$form_code .= $x_country;
@@ -785,40 +596,10 @@ htmlspecialchars("echo ('<input type=\"hidden\" name=\"x_type\" value=\"' . \$x_
 					if($code_wanted[$x] == 19){
 						$php_code .= $php_x_fp_hash;
 					}
-					if($code_wanted[$x] == 20){
-						$php_code .= $php_x_logo_url;
-					}
-					if($code_wanted[$x] == 21){
-						$php_code .= $php_x_color_background;
-					}
-					if($code_wanted[$x] == 22){
-						$form_code .= $x_phone;
-						$php_code .= $php_x_phone;
-					}
-					if($code_wanted[$x] == 23){
-						$form_code .= $x_fax;
-						$php_code .= $php_x_fax;
-					}
-					if($code_wanted[$x] == 24){
-						$form_code .= $x_user1;
-						$php_code .= $php_x_user1;
-					}
-					if($code_wanted[$x] == 25){
-						$form_code .= $x_user2;
-						$php_code .= $php_x_user2;
-					}
-					if($code_wanted[$x] == 26){
-						$form_code .= $x_user3;
-						$php_code .= $php_x_user3;
-					}
-					if($code_wanted[$x] == 27){
-						$form_code .= $x_description;
-						$php_code .= $php_x_description;
-					}
 					}
 				}
 			}
-			$form_code .= htmlspecialchars("<tr><td></td><td><div style='text-align:center'><input class='button' type='submit' value='Submit' /></div></tr></td></table>")."\n".htmlspecialchars("</form>");
+			$form_code .= htmlspecialchars("<table align='center' border='1'><tr><td><input type='submit' value='Submit'></tr></td></table>")."\n".htmlspecialchars("</form>");
 $php_code .= $php_x_fp_timestamp.htmlspecialchars("?>"." <input type='hidden' name='x_show_form' value='PAYMENT_FORM'/>"."\n"."</form>"."Processing your \$ <?php echo \$x_amount ?> payment <?php echo \$x_first_name ?>, please wait..."."</div>
 </body>
 </html>");
@@ -833,13 +614,12 @@ $php_code .= $php_x_fp_timestamp.htmlspecialchars("?>"." <input type='hidden' na
 			$uniqe_file = file_put_contents( $plugin_folder_name_with_autosubmit, htmlspecialchars_decode( $php_code) );
 			$just_xlogin_transkey = file_put_contents( $plugin_folder_name_with_key, htmlspecialchars_decode( $store_xlogin_trans_key) );
 
-			$full_code = "<table class='widefat'><br>
+			$full_code = "<br>
 			<br>Here is your HTML code.<br/>You can put this anywhere on your website.<br/>
-			<textarea id='codeTextArea' rows='30' cols='125'>$form_code</textarea>
+			<textarea id='codeTextArea' rows='10' cols='90'>$form_code</textarea>
 			<br/>
 			</form>
 			</p>
-			</table>
 			"; 
 			return $full_code;
 		}
