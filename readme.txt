@@ -7,7 +7,7 @@ Contributors: DonnellC
 Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4, First Data
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 0.0.6
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
