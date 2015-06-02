@@ -1,0 +1,97 @@
+#hd {
+  background: #FFF
+}
+#external #document {
+  background: #FFF;
+}
+#wrapper-ext {
+  background-color: #FFF;
+}
+html,body {
+  background: #8A8C8F;
+}
+#ft {
+  background-color: #f7f7f7;
+}
+#brand-change-advisory {
+  margin-left: 190px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  width: 332px;
+}
+#brand-change-advisory #gge4 {
+  color: #8a8c8f;
+  font-size: 1.1em;
+}
+#brand-change-advisory #payeezy {
+  color: #58585a;
+  margin-top: 5px;
+  margin-left: 58px;
+  font-size: 1.2em;
+}
+table#terminal_types th,
+table#terminal_types td {
+  text-align: left;
+}
+table#no_color_terminal_types th {
+  background: #bbb;
+  color: #BBB;
+}
+table#terminal_types tr.disabled td,
+table#terminal_types tr.disabled td label {
+  font-weight: normal;
+}
+table#no_color_terminal_types tr.merchant td {
+  background: #ddd;
+}
+table#terminal_types tr td label.disabled {
+  color: #aaa;
+}
+table#terminal_types tr td label.changed {
+  font-weight: bold;
+}
+table#terminal_types td.narrow {
+  width: 100px;
+}
+div#terminal_header h3 {
+  display: inline;
+}
+div#terminal_header {
+  padding: 10px 0;
+}
+table#terminal_types tr.changed td {
+  background: #ffffcc
+}
+table#terminal_types tr.changed:hover td {
+  background: #ffff90
+}
+div#apply_terminal_type_changes {
+  width: 200px;
+  margin-top: 10px;
+  padding: 15px;
+}
+div#apply_terminal_type_changes form {
+  display: inline-block;
+  margin-right:10px;
+}
+div#apply_terminal_type_changes.pending {
+  background: #ffffcc;
+}
+div#apply_terminal_type_changes.no-changes {
+  background: #eee;
+}
+div#terminal_types_welcome div.alphacube_message {
+  text-align: left;
+  margin-left: 20px;
+  width: 700px;
+  font-size: 14px;
+}
+div#terminal_types_welcome p,
+div#terminal_types_welcome ul {
+  margin: 10px 0;
+}
+div#terminal_types_welcome li {
+  list-style: circle;
+  margin-left: 30px;
+}
