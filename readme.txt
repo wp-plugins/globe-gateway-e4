@@ -1,13 +1,13 @@
-=== Global Gateway e4 | Hosted Payment Page | ===
+=== Global Gateway e4 | Payeezy Gateway | ===
 
 Author: Donnell Council
-Version: 0.0.6
+Version: 1.1
 Author URI: http://www.djkidnyce.com
 Contributors: DonnellC
-Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4, First Data
+Tags: gge4, hosted payment page, global gateway e4, First Data global gateway e4, gge4 payment page, gge4HCO, gge4 hco, Hosted Checkout, e4, First Data, Payeezy, Payeezy gateway, Payeezy payment page, E-Commerce, eCommerce, Payeezy Recurring, Recurring payments, Recurring payment
 Requires at least: 3.5
-Tested up to: 3.7.1
-Stable tag: 1.0
+Tested up to: 4.2.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,4 +80,8 @@ This section describes how to install the plugin and get it working.
 * Added user 3 field.
 * Added comments field.
 * Added the ability to copy the billing address into the Shipping address fields.
-* Note: Updating the plugin will remove your current working copy. You will need to get your Payment Page ID, Transaction Key, and other fields you have filled out. 
+
+= 1.1 =
+* Added CSRF(Cross-Site Request Forgery) protection  
+* Moved Settings page to sidebar.
+ 

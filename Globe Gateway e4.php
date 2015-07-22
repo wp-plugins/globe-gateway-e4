@@ -1,27 +1,49 @@
 <?php
 /*
-Plugin Name: Global Gateway e4 | Hosted Payment Page |
+Plugin Name: Global Gateway e4 | Payeezy Gateway |
 Plugin URI: http://www.djkidnyce.com/plug-ins/
-Description: This is for Global Gateway e4 Hosted Payment Page. Global Gateway Made easier for WordPress users to set-up a pay button on their website.
+Description: This is for Global Gateway e4 | Payeezy Hosted Payment Page. Payeezy Made easier for WordPress users to set-up a pay button on their website.
 Author: Donnell Council
-Version: 1.0
-Author URI: http://www.djkidnyce.com
+Version: 1.1
+Author URI: http://djkidnyce.com/about/
 */
-add_action('admin_menu', 'e4hpp_admin_actions');
-function e4hpp_admin_actions() 
-{
-add_options_page('Global Gateway e4 Hosted Payment Page', 'Global Gateway e4 Hosted Payment Page', 'manage_options', 'global-gateway-e4', 'e4hpp_admin');
+add_action('admin_menu', 'payeezy_hpp_main_menu');
+function payeezy_hpp_main_menu() {
+add_menu_page('Global Gateway e4 Payeezy Gateway', 'Payeezy Gateway', 'administrator', __FILE__, 'e4hpp_admin' , plugins_url('/images/dashicon.png', __FILE__) );
+
 }
-function e4hpp_admin()
-{
+// Adds token life line. 7200 = 2 Hours 
+add_filter( 'nonce_life', function () { return 4 * 7200; } );
+/*
+Tokens will be used in future release 
+require dirname(__FILE__) . '/' .'classes/Token.php';
+<input type="hidden" name="token" value="<?php echo Token::generate(); ?>" /> 
+
+// Short for tokens
+function createpagetoken() {
+	ob_start();
+		?>
+	<input name='amount_page_token' value='<?php echo wp_create_nonce('amount_token'); ?>' type='hidden' >
+	<input type="TEXT" name="token" value="<?php echo Token::generate(); ?>" />
+		<?php
+return ob_get_clean();
+}
+
+add_shortcode('form_token', 'createpagetoken'); // Creates [form_token] short code 
+*/
+
+
+function e4hpp_admin(){
 $dir = plugin_dir_path( __FILE__ );
 $the_file = 'xlogin_transkey.php';
 $filename = $dir. $the_file;
-if (file_exists($filename)) 
-{
+if (file_exists($filename)) {
 include($dir. $the_file);
 }
 ?>
+
+
+
 <script type="text/javascript">
 function wantedchecked() {
     if (document.getElementById('recurring_b_f_c').checked) {
@@ -75,8 +97,10 @@ function wantedchecked() {
 
 
 <form name='verify_login_transkey' method='POST' action='<?php echo $_SERVER['REQUEST_URI']; ?>'>
+
 <br>Payment Page ID: <input name="x_login_raw" value="<?php echo $x_login; ?>" size="30" autocomplete="off" required autofocus/><br/>
 <br>Transaction Key: <input name="transaction_key_raw" value="<?php echo $transaction_key; ?>" size="25" autocomplete="off" required/><br/>
+<input type="hidden" name="csrf_token" value="<?php echo wp_create_nonce('payeezy_nonce'); ?>" />
 <input type='checkbox' name='attributes[]' value='2'> Company</input><br/>
 <input type='checkbox' name='attributes[]' value='1'> First Name and Last Name</input><br/>
 <input type='checkbox' name='attributes[]' value='3'> Billing Address Fields</input><br/>
@@ -328,7 +352,11 @@ Love this plug-in please leave a
 
 
 <?php
-function get_code(){
+//CSRF Protection
+if(isset($_POST['csrf_token'])){
+		if(wp_verify_nonce($_POST['csrf_token'], 'payeezy_nonce')) {
+		
+			function get_code(){
 		//get there selected checkboxes
 		$code_wanted = $_POST['attributes'];
 		$arrylen = count($code_wanted);
@@ -845,6 +873,10 @@ $php_code .= $php_x_fp_timestamp.htmlspecialchars("?>"." <input type='hidden' na
 		}
 
 echo get_code();
+		} else{
+			echo 'This request did not originate from this page or your token expired'; exit;
+		}
+	}
 ?>
 
 <?php
